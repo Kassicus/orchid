@@ -1,6 +1,8 @@
 import pygame
+import random
 
 import lib
+import units
 
 pygame.init()
 
@@ -12,6 +14,8 @@ class Game():
         self.running = True
         self.clock = pygame.time.Clock()
         lib.events = pygame.event.get()
+
+        self.units = pygame.sprite.Group()
 
     def start(self):
         while self.running:
@@ -26,10 +30,26 @@ class Game():
             if event.type == pygame.QUIT:
                 self.running = False
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    for u in range(5):
+                        u = units.Unit(random.randint(50, 300), random.randint(50, 750))
+                        self.units.add(u)
+
+                if event.key == pygame.K_s:
+                    lib.mousemode = "select"
+                
+                if event.key == pygame.K_m:
+                    lib.mousemode = "move"
+
     def draw(self):
-        self.screen.fill((0, 0, 0))
+        self.screen.fill(lib.color.black)
+
+        self.units.draw(self.screen)
 
     def update(self):
+        self.units.update()
+
         pygame.display.update()
         lib.deltatime = self.clock.tick(120) / 1000
 
