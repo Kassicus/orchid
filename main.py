@@ -3,6 +3,7 @@ import random
 
 import lib
 import units
+import debug
 
 pygame.init()
 
@@ -11,9 +12,13 @@ class Game():
         self.screen = pygame.display.set_mode([lib.window_size.x, lib.window_size.y])
         pygame.display.set_caption("Project Orchid")
 
+        lib.display_surface = self.screen
+
         self.running = True
         self.clock = pygame.time.Clock()
         lib.events = pygame.event.get()
+
+        self.debug_interface = debug.DebugInterface()
 
         self.units = pygame.sprite.Group()
 
@@ -42,14 +47,21 @@ class Game():
                 if event.key == pygame.K_m:
                     lib.mousemode = "move"
 
+                if event.key == pygame.K_TAB:
+                    self.debug_interface.toggle_active()
+
     def draw(self):
         self.screen.fill(lib.color.black)
 
         self.units.draw(self.screen)
 
+        if self.debug_interface.active:
+            self.debug_interface.draw(self.units)
+
     def update(self):
         self.units.update()
 
+        self.debug_interface.update(self.clock)
         pygame.display.update()
         lib.deltatime = self.clock.tick(120) / 1000
 

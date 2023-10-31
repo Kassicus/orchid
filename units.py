@@ -17,7 +17,7 @@ class Unit(pygame.sprite.Sprite):
 
         self.selected = False
 
-        self.image = pygame.Surface([25, 25])
+        self.image = pygame.Surface([21, 21])
         self.image.fill(lib.color.friendly)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
@@ -49,6 +49,9 @@ class Unit(pygame.sprite.Sprite):
                     mouse_x, mouse_y = pygame.mouse.get_pos()
                     self.set_new_target(random.randint(mouse_x - 50, mouse_x + 50), random.randint(mouse_y - 50, mouse_y + 50))
                     self.selected = False
+
+    def draw_debug(self):
+        pygame.draw.line(lib.display_surface, lib.color.magenta, self.pos, self.target_pos)
 
     def check_selected(self):
         mouse_x, mouse_y = pygame.mouse.get_pos()
