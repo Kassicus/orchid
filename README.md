@@ -8,7 +8,7 @@ This is a *test run* for a project I have been considering building for a while.
 
 ### Project Goals
 
-- [ ] point and click movement
+- [x] point and click movement
 - [ ] obstruction detection (not having a unit fire through a wall, but waiting until they have a clear line of sight)
 - [ ] potentially A* pathfinding
 - [ ] proper collisions
