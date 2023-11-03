@@ -53,6 +53,10 @@ class Game():
                 if event.key == pygame.K_BACKQUOTE:
                     self.debug_interface.toggle_fps_mode()
 
+            if event.type == pygame.MOUSEBUTTONUP:
+                if lib.mousemode == "move":
+                    lib.mousemode = "select"
+
     def draw(self):
         self.screen.fill(lib.color.black)
 
