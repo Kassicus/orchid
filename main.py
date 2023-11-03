@@ -20,8 +20,6 @@ class Game():
 
         self.debug_interface = debug.DebugInterface()
 
-        self.units = pygame.sprite.Group()
-
     def start(self):
         while self.running:
             self.event_loop()
@@ -37,15 +35,18 @@ class Game():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    for u in range(1):
-                        u = units.Unit(random.randint(50, 300), random.randint(50, 750))
-                        self.units.add(u)
+                    for u in range(6):
+                        u = units.Unit(random.choice(["a", "b"]))
+                        lib.units.add(u)
 
                 if event.key == pygame.K_s:
                     lib.mousemode = "select"
                 
                 if event.key == pygame.K_m:
                     lib.mousemode = "move"
+
+                if event.key == pygame.K_q:
+                    self.running = False
 
                 if event.key == pygame.K_TAB:
                     self.debug_interface.toggle_active()
@@ -60,13 +61,13 @@ class Game():
     def draw(self):
         self.screen.fill(lib.color.black)
 
-        self.units.draw(self.screen)
+        lib.units.draw(self.screen)
 
         if self.debug_interface.active:
-            self.debug_interface.draw(self.units)
+            self.debug_interface.draw(lib.units)
 
     def update(self):
-        self.units.update()
+        lib.units.update()
 
         self.debug_interface.update(self.clock)
         pygame.display.update()
