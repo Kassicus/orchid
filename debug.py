@@ -9,6 +9,7 @@ class DebugInterface():
         self.font = pygame.font.SysFont("Courier", 16)
 
         self.offset = 10
+        self.fps_capped = True
 
         self.t_fps = None
         self.t_mouse = None
@@ -49,6 +50,12 @@ class DebugInterface():
             self.active = False
         else:
             self.active = True
+
+    def toggle_fps_mode(self):
+        if self.fps_capped:
+            self.fps_capped = False
+        else:
+            self.fps_capped = True
 
     def draw(self, unit_group: pygame.sprite.Group):
         lib.display_surface.blit(self.t_fps, (self.o_fps, 10))

@@ -37,7 +37,7 @@ class Game():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    for u in range(5):
+                    for u in range(1):
                         u = units.Unit(random.randint(50, 300), random.randint(50, 750))
                         self.units.add(u)
 
@@ -49,6 +49,9 @@ class Game():
 
                 if event.key == pygame.K_TAB:
                     self.debug_interface.toggle_active()
+
+                if event.key == pygame.K_BACKQUOTE:
+                    self.debug_interface.toggle_fps_mode()
 
     def draw(self):
         self.screen.fill(lib.color.black)
@@ -63,7 +66,11 @@ class Game():
 
         self.debug_interface.update(self.clock)
         pygame.display.update()
-        lib.deltatime = self.clock.tick(120) / 1000
+        
+        if self.debug_interface.fps_capped:
+            lib.deltatime = self.clock.tick(120) / 1000
+        else:
+            lib.deltatime = self.clock.tick(10000) / 1000
 
 if __name__ == '__main__':
     game = Game()

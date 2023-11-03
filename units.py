@@ -14,6 +14,7 @@ class Unit(pygame.sprite.Sprite):
         self.target_pos = pygame.math.Vector2(target_x, target_y)
 
         self.speed = 200
+        self.range = 150
 
         self.selected = False
 
@@ -52,6 +53,8 @@ class Unit(pygame.sprite.Sprite):
 
     def draw_debug(self):
         pygame.draw.line(lib.display_surface, lib.color.magenta, self.pos, self.target_pos)
+
+        pygame.draw.circle(lib.display_surface, lib.color.white, self.pos, self.range, 1)
 
     def check_selected(self):
         mouse_x, mouse_y = pygame.mouse.get_pos()
