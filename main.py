@@ -4,6 +4,7 @@ import random
 import lib
 import units
 import debug
+import walls
 
 pygame.init()
 
@@ -19,6 +20,8 @@ class Game():
         lib.events = pygame.event.get()
 
         self.debug_interface = debug.DebugInterface()
+
+        self.wall_group = pygame.sprite.Group()
 
     def start(self):
         while self.running:

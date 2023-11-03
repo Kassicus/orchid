@@ -4,6 +4,7 @@ class Color():
     def __init__(self):
         self.black = pygame.Color(0, 0, 0, 255)
         self.white = pygame.Color(255, 255, 255)
+        self.gray = pygame.Color(150, 150, 150)
         self.friendly = pygame.Color(0, 255, 100)
         self.friendly_highlight = pygame.Color(0, 255, 200)
         self.friendly_selected = pygame.Color(100, 255, 255)
