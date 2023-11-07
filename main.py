@@ -23,6 +23,11 @@ class Game():
 
         self.wall_group = pygame.sprite.Group()
 
+        self.wall_group.add(
+            walls.Wall(100, 100, 100, 15),
+            walls.Wall(700, 700, 100, 15)
+        )
+
     def start(self):
         while self.running:
             self.event_loop()
@@ -64,6 +69,7 @@ class Game():
     def draw(self):
         self.screen.fill(lib.color.black)
 
+        self.wall_group.draw(self.screen)
         lib.units.draw(self.screen)
 
         if self.debug_interface.active:
